@@ -133,13 +133,24 @@ VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
 
+FROM php:8.2-fpm
+
+# PostgreSQL driver yükle
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo_pgsql pgsql
+
+# Diğer gereksinimler
+RUN docker-php-ext-install pdo mbstring tokenizer bcmath gd
+
 COPY docker/startup.sh docker/supervisord.conf /
 COPY docker/supervisor-exit-event-listener /usr/bin/supervisor-exit-event-listener
 RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
-#CMD ["/startup.sh"]
+CMD ["/startup.sh"]
+
+
 
 EXPOSE 80
 EXPOSE 443
