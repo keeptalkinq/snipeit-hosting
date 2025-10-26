@@ -139,7 +139,7 @@ RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 RUN apt-get update && apt-get install -y php8.3-pgsql
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
-CMD ["/startup.sh"]
+#CMD ["/startup.sh"]
 
 EXPOSE 80
 EXPOSE 443
