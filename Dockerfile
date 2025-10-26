@@ -25,7 +25,7 @@ php8.3-zip \
 php8.3-bcmath \
 php8.3-redis \
 php3-3-redis \
-php8.3-pgsql \
+
 php-memcached \
 patch \
 curl \
@@ -134,6 +134,7 @@ COPY docker/startup.sh docker/supervisord.conf /
 COPY docker/supervisor-exit-event-listener /usr/bin/supervisor-exit-event-listener
 RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN apt-get update && apt-get install -y php-pgsql
 CMD ["/startup.sh"]
 
 EXPOSE 80
