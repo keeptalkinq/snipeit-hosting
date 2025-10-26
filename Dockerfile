@@ -122,9 +122,10 @@ USER root
 
 #COPY docker/app_install.exp /tmp/app_install.exp
 #RUN chmod +x /tmp/app_install.exp
+
 #RUN /tmp/app_install.exp
 
-RUN apt-get update && apt-get install -y php8.3-pgsql
+#
 
 ############### DATA VOLUME #################
 
@@ -132,9 +133,11 @@ VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
 
-COPY docker/startup.sh docker/supervisord.conf /
+#COPY docker/startup.sh docker/supervisord.conf /
 COPY docker/supervisor-exit-event-listener /usr/bin/supervisor-exit-event-listener
 RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
+RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN apt-get update && apt-get install -y php8.3-pgsql
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 CMD ["/startup.sh"]
 
