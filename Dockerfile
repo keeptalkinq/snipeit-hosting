@@ -24,6 +24,8 @@ php8.3-mbstring \
 php8.3-zip \
 php8.3-bcmath \
 php8.3-redis \
+php3-3-redis \
+php3-3-pdo_pgsql \
 php-memcached \
 patch \
 curl \
