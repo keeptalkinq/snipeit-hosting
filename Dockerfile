@@ -25,7 +25,7 @@ php8.3-zip \
 php8.3-bcmath \
 php8.3-redis \
 php3-3-redis \
-php3-3-pdo_pgsql \
+php8.3-pgsql \
 php-memcached \
 patch \
 curl \
@@ -133,7 +133,7 @@ VOLUME ["/var/lib/snipeit"]
 COPY docker/startup.sh docker/supervisord.conf /
 COPY docker/supervisor-exit-event-listener /usr/bin/supervisor-exit-event-listener
 RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
-
+RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 CMD ["/startup.sh"]
 
 EXPOSE 80
